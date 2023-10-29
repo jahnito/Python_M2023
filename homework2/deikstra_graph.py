@@ -12,7 +12,21 @@ w = [
 
 active = [True] * n # Просмотренные 
 r = w[0]            # Берем все ребра от первой вершины (Пермь)
-p = [0] * n         # 
+p = [0] * n         #
 
 active[0] = False
+p[0] = -1
+
+
+for i in range(n - 1):
+    mindist = 1e10
+    for j in range(n):
+        if active[j] and r[j] < mindist:
+            mindist = r[j]
+            kmin = j
+        active[kmin] = False
+        for j in range(n):
+            if r[kmin] + w[kmin][j] < r[j]:
+                r[j] = r[kmin] + w[kmin][j]
+                p[j] = kmin
 
